@@ -1,30 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SequenceManager : MonoBehaviour
 {
-    //public List<string> correctSequence = new List<string>();                    //Creates a list of strings that's meant to be the right sequence
     public List<string> playerSequence = new List<string>();                     //Creates a list from what the player has clicked from the other list
-
-    private bool checking = false; //Bool that checks if the sequence is correct
+    private bool checking = false;                                               //Bool that checks if the sequence is correct
 
     public SequenceCounter sequenceCounter;
     public bool fullSequence;
-
     public int maxWordAmount;
+
+    public GameObject SequenceFinishedText;
+    public bool clearText;
+    
+
 
     void Update()
     {
-        /* if (playerSequence.Count == correctSequence.Count && checking == false)      //Checks if the amount of words in the players sequence matches up with the correct sequence
-         {
-             checking = true;
-             //checkSequence();
-         }
-        */
-        if (playerSequence.Count==20)
+       
+        if (playerSequence.Count == maxWordAmount)
         {
             fullSequence = true;
+        }
+
+        if (fullSequence == true)
+        {
+            FinishedSequence();
         }
     }
        
@@ -42,25 +45,22 @@ public class SequenceManager : MonoBehaviour
 
     public void FinishedSequence() //Resets sequence
     {
-        /*if (fullSequence = true)
-        {
-
-        }
-        */
-        Debug.Log("Reset text sequence");
-        //playerSequence.Clear();
-        //sequenceCounter.UpdateText();
-        //checking = false;
+        SequenceFinishedText.SetActive(true);
+        
+        Debug.Log("Reset text sequence");   
+       
     }
 
-    /*public void checkSequence() //Checks if the correct sequence corresponds with the player sequence
+    public void Yes()
     {
-        for (int i=0; i< correctSequence.Count; i++)
-        {
-            if(correctSequence[i]!= playerSequence[i])
-            { ResetSequence();
-                return;
-            }
-        }
-    } */
+        //code
+        SceneManager.LoadScene(0);
+    }
+
+    public void No()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+    
 }

@@ -6,7 +6,7 @@ public class TextMoveScript : MonoBehaviour
 {
 
     public Transform startPos, endPos;
-    float speed = 2f;
+    public float speed = 2f;
     public bool atEnd;
 
     RectTransform rect;
