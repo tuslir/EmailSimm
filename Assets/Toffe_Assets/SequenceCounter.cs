@@ -9,6 +9,8 @@ public class SequenceCounter : MonoBehaviour
     public SequenceManager sequence;
     private bool wrongSequence = false;
 
+    
+
     void Start()
     {
         displayedText = GetComponent<Text>();
@@ -16,9 +18,13 @@ public class SequenceCounter : MonoBehaviour
     }
 
     
-    public void UpdateText()
+    public void UpdateText(string newText)
     {
-        switch (sequence.playerSequence.Count)
+        
+            displayedText.text = displayedText.text + newText;
+        
+
+        /*switch (sequence.playerSequence.Count)
         {
             case 1:
                 displayedText.text = sequence.playerSequence[0].ToString();
@@ -44,10 +50,20 @@ public class SequenceCounter : MonoBehaviour
                 {
                     wrongSequence = true;
                     
+                    
                 }
                 return;
-
+        
         }
+        */
+
+        /* IEnumerator resetText()
+         {
+             wrongSequence = false;
+             yield return new WaitForSeconds(1);
+             displayedText.text = "";
+         } 
+        */
 
 
     }

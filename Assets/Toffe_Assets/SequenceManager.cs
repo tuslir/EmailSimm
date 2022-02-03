@@ -4,37 +4,56 @@ using UnityEngine;
 
 public class SequenceManager : MonoBehaviour
 {
-    public List<int> correctSequence = new List<int>();                    //Creates a list of strings that's meant to be the right sequence
-    public List<int> playerSequence = new List<int>();                     //Creates a list from what the player has clicked from the other list
+    //public List<string> correctSequence = new List<string>();                    //Creates a list of strings that's meant to be the right sequence
+    public List<string> playerSequence = new List<string>();                     //Creates a list from what the player has clicked from the other list
 
     private bool checking = false; //Bool that checks if the sequence is correct
 
     public SequenceCounter sequenceCounter;
+    public bool fullSequence;
+
+    public int maxWordAmount;
 
     void Update()
     {
-        if (playerSequence.Count == correctSequence.Count && checking == false)      //Checks if the amount of words in the players sequence matches up with the correct sequence
+        /* if (playerSequence.Count == correctSequence.Count && checking == false)      //Checks if the amount of words in the players sequence matches up with the correct sequence
+         {
+             checking = true;
+             //checkSequence();
+         }
+        */
+        if (playerSequence.Count==20)
         {
-            checking = true;
-            checkSequence();
+            fullSequence = true;
         }
     }
+       
 
-    public void AddSequence(int mailText) //Adds string to list
+    public void AddSequence(string mailText) //Adds number to list
     {
-        playerSequence.Add(mailText);
-        sequenceCounter.UpdateText();
+        if (playerSequence.Count < maxWordAmount)
+        {
+            
+            playerSequence.Add(mailText);
+            sequenceCounter.UpdateText(mailText);
+        }
+       
     }
 
-    public void ResetSequence() //Resets sequence
+    public void FinishedSequence() //Resets sequence
     {
+        /*if (fullSequence = true)
+        {
+
+        }
+        */
         Debug.Log("Reset text sequence");
-        checking = false;
-        playerSequence.Clear();
-        sequenceCounter.UpdateText();
+        //playerSequence.Clear();
+        //sequenceCounter.UpdateText();
+        //checking = false;
     }
 
-    public void checkSequence() //Checks if the correct sequence corresponds with the player sequence
+    /*public void checkSequence() //Checks if the correct sequence corresponds with the player sequence
     {
         for (int i=0; i< correctSequence.Count; i++)
         {
@@ -43,5 +62,5 @@ public class SequenceManager : MonoBehaviour
                 return;
             }
         }
-    } 
+    } */
 }
