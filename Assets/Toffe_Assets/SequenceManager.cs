@@ -22,7 +22,7 @@ public class SequenceManager : MonoBehaviour
        
         if (playerSequence.Count == maxWordAmount)
         {
-            fullSequence = true;
+            FinishedSequence();
         }
 
         if (fullSequence == true)
