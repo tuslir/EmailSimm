@@ -2,19 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class SequenceManager : MonoBehaviour
 {
     public List<string> playerSequence = new List<string>();                     //Creates a list from what the player has clicked from the other list
-    private bool checking = false;                                               //Bool that checks if the sequence is correct
 
     public SequenceCounter sequenceCounter;
     public bool fullSequence;
     public int maxWordAmount;
 
+    [Header("Public objects")]
+    public TextMeshProUGUI userInputTMP;
     public GameObject SequenceFinishedText;
+    public GameObject pic;
+
     public bool clearText;
-    
+    public bool flashed = false;
 
 
     void Update()
@@ -25,10 +29,6 @@ public class SequenceManager : MonoBehaviour
             FinishedSequence();
         }
 
-        if (fullSequence == true)
-        {
-            FinishedSequence();
-        }
     }
        
 
@@ -53,14 +53,38 @@ public class SequenceManager : MonoBehaviour
 
     public void Yes()
     {
-        //code
-        SceneManager.LoadScene(0);
+
+        if (flashed == false)
+        {
+            userInputTMP.text = string.Empty;
+            playerSequence.Clear();
+            SequenceFinishedText.SetActive(false);
+            StartCoroutine(FlashPic());
+        }
+        else
+        {
+            userInputTMP.text = string.Empty;
+            playerSequence.Clear();
+            SequenceFinishedText.SetActive(false);
+        }
     }
 
     public void No()
     {
-        SceneManager.LoadScene(0);
+        userInputTMP.text = string.Empty;
+        playerSequence.Clear();
+        SequenceFinishedText.SetActive(false);
     }
 
-    
+    IEnumerator FlashPic()
+    {
+
+        yield return new WaitForSeconds(1);
+        pic.SetActive(true);
+        yield return new WaitForSeconds(0.05f);
+        pic.SetActive(false);
+        flashed = true;
+
+         }
+
 }
