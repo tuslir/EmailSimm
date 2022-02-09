@@ -42,3 +42,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: DEBUG BUTTON
+    uniqueID: 1982283025
+    locked: 0
